@@ -5,6 +5,7 @@ export const ADD_TODO = 'ADD_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const RECEIVE_TODO_ITEMS = 'RECEIVE_TODO_ITEMS';
+export const ADD_USER_WITH_TODOS = 'ADD_USER_WITH_TODOS';
 
 export function addTodoToState(todoItem) {
   return { type: ADD_TODO, todoItem };
@@ -23,6 +24,10 @@ export function receiveTodoItems(todoItems) {
     type: RECEIVE_TODO_ITEMS,
     todoItems
   };
+}
+
+export function addTodoAndUserToState(user, todo) {
+  return { type: ADD_USER_WITH_TODOS, user, todo };
 }
 
 export function fetchTodoItems() {
@@ -103,6 +108,25 @@ export function editTodoItem(index, id, text) {
     .then(actionHelpers.checkStatus)
     .then(actionHelpers.parseJSON)
     .then((todo) => dispatch(updateTodoInState(todo, index)))
+    .catch(actionHelpers.logError);
+  };
+}
+
+export function addTodoToUser(user, todo) {
+  const config = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user, todo })
+  };
+
+  return (dispatch) => {
+    return fetch(('/api/save'), config)
+    .then(actionHelpers.checkStatus)
+    .then(actionHelpers.parseJSON)
+    .then((userTodo) => dispatch(addTodoAndUserToState(userTodo)))
     .catch(actionHelpers.logError);
   };
 }

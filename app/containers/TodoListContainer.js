@@ -9,6 +9,7 @@ import AddTodo from '../components/TodoList/AddTodo';
 
 class TodoListContainer extends React.Component {
   constructor(props) {
+    console.log(props, 'props in TodoListContainer');
     super(props);
     this.props.actions.fetchTodoItems();
   }
@@ -18,7 +19,7 @@ class TodoListContainer extends React.Component {
     return (
       <div>
         <TodoList todoItems={todoItems} actions={actions}/>
-        <AddTodo addTodoItem={actions.addTodoItem} />
+        <AddTodo addTodoItem={actions.addTodoItem} saveTodoToUser={actions.addTodoAndUserToState} />
       </div>
     );
   }
@@ -30,8 +31,10 @@ TodoListContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    todoItems: state.todos.get('todoItems')
+    todoItems: state.todos.get('todoItems'),
+    user: state.auth.get('user'),
   };
 };
 

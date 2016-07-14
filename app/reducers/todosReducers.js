@@ -17,6 +17,9 @@ const todos = (state = Map({ todoItems: List() }), action) => {
       });
       return state.set('todoItems', newTodoList);
     }
+    case 'ADD_USER_WITH_TODO': {
+      return state;
+    }
     default: {
       return state;
     }

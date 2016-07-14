@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export const AddTodo = ({ addTodoItem }) => {
+export const AddTodo = (props) => {
+  console.log(props, 'addTodo props');
   const addTodo = () => {
     let inputField = document.getElementById('addTodoText');
 

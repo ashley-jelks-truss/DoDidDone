@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { signUpUser, logInUser } from '../actions/authAction';
 import AuthModals from '../components/AuthModals';
 
-class AuthContainer extends React.Component {
+class AuthContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -68,7 +68,6 @@ AuthContainer.propTypes = {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.get('token'),
-    user: state.auth.get('user')
   };
 };
 
