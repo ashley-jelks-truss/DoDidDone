@@ -18,7 +18,7 @@ class TodoListContainer extends React.Component {
     return (
       <div>
         <TodoList todoItems={todoItems} actions={actions}/>
-        <AddTodo onSubmit={actions.addTodoItem} />
+        <AddTodo addTodoItem={actions.addTodoItem} />
       </div>
     );
   }
